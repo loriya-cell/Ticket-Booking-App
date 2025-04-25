@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Booking History</title>
+</head>
+<body>
+    <h2>Your Booking History</h2>
+    <ul>
+        {% for booking in bookings %}
+            <li>{{ booking.show.name }} - {{ booking.seats }} seats</li>
+        {% endfor %}
+    </ul>
+</body>
+</html>

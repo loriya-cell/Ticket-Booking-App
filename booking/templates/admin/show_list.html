@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Show List</title>
+</head>
+<body>
+    <h2>All Shows</h2>
+    <a href="{% url 'add_show' %}">Add New Show</a>
+    <ul>
+        {% for show in shows %}
+            <li>
+                {{ show.name }} - {{ show.date }} at {{ show.venue }} - Available Seats: {{ show.available_seats }}
+                <a href="{% url 'edit_show' show.id %}">Edit</a>
+                <form method="POST" action="{% url 'delete_show' show.id %}" style="display:inline;">
+                    {% csrf_token %}
+                    <button type="submit">Delete</button>
+                </form>
+            </li>
+        {% endfor %}
+    </ul>
+</body>
+</html>

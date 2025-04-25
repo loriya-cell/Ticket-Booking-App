@@ -1,0 +1,158 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ticket Booking Home</title>
+
+    <style>
+        /* Reset some basic styles */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Arial', sans-serif;
+            background-color: #f4f4f4;
+            color: #333;
+            line-height: 1.6;
+        }
+
+        /* Navbar Styling */
+        .navbar {
+            list-style: none;
+            background-color: #333;
+            text-align: center;
+            padding: 10px 0;
+        }
+
+        .navbar li {
+            display: inline;
+            margin-right: 20px;
+        }
+
+        .navbar a {
+            color: white;
+            text-decoration: none;
+            font-size: 18px;
+        }
+
+        .navbar a:hover {
+            color: #f39c12;
+        }
+
+        /* Header */
+        header {
+            background-color: #333;
+            padding: 20px 0;
+        }
+
+        /* Main Content */
+        main {
+            padding: 20px;
+            max-width: 1200px;
+            margin: auto;
+        }
+
+        /* Show List Section */
+        .show-list {
+            margin-top: 40px;
+        }
+
+        .show-cards {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 20px;
+        }
+
+        .show-card {
+            background-color: white;
+            padding: 20px;
+            width: calc(33.333% - 20px);
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            border-radius: 8px;
+            text-align: center;
+        }
+
+        .show-card h3 {
+            font-size: 22px;
+            margin-bottom: 10px;
+        }
+
+        .show-card p {
+            font-size: 16px;
+            color: #555;
+        }
+
+        .button {
+            background-color: #27ae60;
+            color: white;
+            padding: 10px 20px;
+            text-decoration: none;
+            border-radius: 5px;
+            font-weight: bold;
+            transition: background-color 0.3s;
+        }
+
+        .button:hover {
+            background-color: #2ecc71;
+        }
+
+        /* Footer */
+        footer {
+            text-align: center;
+            background-color: #333;
+            color: white;
+            padding: 10px 0;
+            position: fixed;
+            width: 100%;
+            bottom: 0;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Header and Navigation Bar -->
+    <header>
+        <nav>
+            <ul class="navbar">
+                <li><a href="{% url 'home' %}">Home</a></li>
+                <li><a href="{% url 'book_ticket' 1 %}">Book Ticket</a></li>
+                <li><a href="{% url 'booking_history' %}">Booking History</a></li>
+                <li><a href="{% url 'logout' %}">Logout</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <!-- Main Content -->
+    <main>
+        <section class="welcome">
+            <h1>Welcome to the Ticket Booking System</h1>
+        </section>
+
+        <section class="show-list">
+            <h2>Available Shows</h2>
+            <div class="show-cards">
+                {% for show in shows %}
+                    <div class="show-card">
+                        <h3>{{ show.name }}</h3>
+                        <p>{{ show.date }} at {{ show.time }}</p>
+                        <a href="{% url 'book_ticket' show.id %}" class="button">Book Ticket</a>
+                    </div>
+                {% empty %}
+                    <p>No shows available at the moment.</p>
+                {% endfor %}
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer>
+        <p>&copy; 2025 Ticket Booking System</p>
+    </footer>
+
+</body>
+</html>
